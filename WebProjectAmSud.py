@@ -32,7 +32,8 @@ def get_capital(info):
     try:
         cap = info['capital']
         m = re.findall('\[\[(.*)\]\]',cap)[0]
-        m = re.match('(\w+)',m)[0]
+        m = re.findall('[\w+ ]',m)
+        m = ''.join(m)
         return m
     except:
         return f""
@@ -95,6 +96,15 @@ def save_info_zip(file):
             info = json.loads(z.read(c))    # infobox de l'un des pays
             country = c.split('.')[0]
             save_country(conn,str(country),info)
-save_info_zip('south_america') 
-
+            
+def delete_info_zip(file):
+    # ouverture d'une connexion avec la base de données
+    conn = sqlite3.connect('pays.sqlite')
+    with ZipFile(file+'.zip','r') as z: # liste des documents contenus dans le fichier zip
+        for c in z.namelist():   
+            country = c.split('.')[0]
+            delete_country(conn,str(country))
+            
+save_info_zip('south_america')
+#delete_info_zip('south_america')
 
