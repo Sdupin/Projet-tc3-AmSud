@@ -32,8 +32,7 @@ def get_capital(info):
     try:
         cap = info['capital']
         m = re.findall('\[\[(.*)\]\]',cap)[0]
-        m = re.findall('[\w+ ]',m)
-        m = ''.join(m)
+        m = re.match('[\w+ ]*',m)[0]
         return m
     except:
         return f""
@@ -107,4 +106,3 @@ def delete_info_zip(file):
             
 save_info_zip('south_america')
 #delete_info_zip('south_america')
-
