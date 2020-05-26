@@ -105,4 +105,4 @@ def delete_info_zip(file):
             delete_country(conn,str(country))
             
 save_info_zip('south_america')
-delete_info_zip('south_america')
+# delete_info_zip('south_america')
