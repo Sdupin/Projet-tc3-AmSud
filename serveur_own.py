@@ -172,9 +172,9 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   def db_get_country(self,country):
     # préparation de la requête SQL
     c = conn.cursor()
-    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent from countries'
+    sql = 'SELECT * from countries WHERE wp=?'
     # récupération de l'information (ou pas)
-    c.execute(sql)
+    c.execute(sql, (country,))
     return c.fetchone()
 
   #
