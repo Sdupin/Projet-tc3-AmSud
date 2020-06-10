@@ -105,6 +105,7 @@ def save_country(conn,country,info):
          population = get_population(info[0])
          population_year = get_population_year(info[0])
          continent = info[-1]
+         flag = get_flag(info[1])
          # soumission de la commande (noter que le second argument est un tuple)
          c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent, flag))
      except Exception as e:
@@ -132,9 +133,15 @@ def read_country(conn,country):
 def save_info_zip(conn,file):
     with ZipFile(file+'.zip','r') as z: # liste des documents contenus dans le fichier zip
         for c in z.namelist():   
-            info = [json.loads(z.read(c)),file]    # infobox de l'un des pays
+            info = [json.loads(z.read(c)),c,file]    # infobox de l'un des pays
             country = c.split('.')[0]
             save_country(conn,str(country),info)
+            
+    
+def get_flag(info):
+     
+    
+    
             
 def delete_info_zip(conn,file):
     with ZipFile(file+'.zip','r') as z: # liste des documents contenus dans le fichier zip
