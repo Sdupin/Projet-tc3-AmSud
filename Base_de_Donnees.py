@@ -73,7 +73,12 @@ def get_population(info):
         population = float(population.replace(",",""))
         return population
     except :
-        return f""
+        try :
+            population = info["population_estimate"]
+            population = float(population.replace(",",""))
+            return population
+        except :
+            return f""
     
 def get_population_year(info):
     try :
@@ -81,20 +86,27 @@ def get_population_year(info):
         population_year = int(population_year.replace(",",""))
         return population_year
     except :
-        return f""
+        try :
+            population_year = info["population_estimate_year"]
+            population_year = int(population_year.replace(",",""))
+            return population_year
+        except :
+            return f""
+
 def save_country(conn,country,info):
      c = conn.cursor()
      try:
-         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?,?)'
+         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
          # les infos à enregistrer
-         name = get_name(info)
-         capital = get_capital(info)
-         coords = get_coords(info)
-         area = get_area(info)
-         population = get_population(info)
-         population_year = get_population_year(info)
+         name = get_name(info[0])
+         capital = get_capital(info[0])
+         coords = get_coords(info[0])
+         area = get_area(info[0])
+         population = get_population(info[0])
+         population_year = get_population_year(info[0])
+         continent = info[-1]
          # soumission de la commande (noter que le second argument est un tuple)
-         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year))
+         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent))
      except Exception as e:
          if str(e) == 'UNIQUE constraint failed: countries.wp':
              # ce pays a été déjà enregistré
@@ -120,7 +132,7 @@ def read_country(conn,country):
 def save_info_zip(conn,file):
     with ZipFile(file+'.zip','r') as z: # liste des documents contenus dans le fichier zip
         for c in z.namelist():   
-            info = json.loads(z.read(c))    # infobox de l'un des pays
+            info = [json.loads(z.read(c)),file]    # infobox de l'un des pays
             country = c.split('.')[0]
             save_country(conn,str(country),info)
             
@@ -132,5 +144,4 @@ def delete_info_zip(conn,file):
             
 conn = sqlite3.connect('pays.sqlite')
 save_info_zip(conn,"south_america")
-
-# Oui
+save_info_zip(conn,"oceania")
