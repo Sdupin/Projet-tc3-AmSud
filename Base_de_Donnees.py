@@ -59,6 +59,16 @@ def get_coords(info):
     coor['lon'] = lon
     return coor
 
+def get_currency(info):
+    
+    if info['common_name'] == 'Samoa':
+        return 'Samoan Tala'
+    else:
+        cap = info['currency']
+        m = re.findall('\[\[(.*)\]\]',cap)[0]
+        l = m.split('|')
+        return l[-1]
+   
 def get_area(info):
     try :
         area = info['area_km2']
@@ -96,7 +106,7 @@ def get_population_year(info):
 def save_country(conn,country,info):
      c = conn.cursor()
      try:
-         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
          # les infos à enregistrer
          name = get_name(info[0])
          capital = get_capital(info[0])
@@ -106,9 +116,10 @@ def save_country(conn,country,info):
          population_year = get_population_year(info[0])
          continent = info[-1]
          flag = get_flag(info[1])
+         currency = get_currency(info[0])
          link = "https://en.wikipedia.org/wiki/" + info[1].strip('.json')
          # soumission de la commande (noter que le second argument est un tuple)
-         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent, flag,link))
+         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent, flag,currency,link))
      except Exception as e:
          if str(e) == 'UNIQUE constraint failed: countries.wp':
              # ce pays a été déjà enregistré
@@ -170,10 +181,11 @@ c.execute("""CREATE TABLE `countries` (              -- la table est nommé "cou
 	`latitude`	REAL,                   -- latitude, champ numérique à valeur décimale
 	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
 	`area`      REAL,
-    `population`  REAL,
+    `population`  INTEGER,
     `population_year`  REAL,
     `continent`    TEXT,
     `flag`      TEXT,
+    `currency`  TEXT,
     `link`      TEXT,
     PRIMARY KEY(`wp`)                   -- wp est la clé primaire
 );""")
