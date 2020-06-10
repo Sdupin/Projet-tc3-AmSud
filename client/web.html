@@ -54,7 +54,6 @@ option[disabled] {
 </style>
 
 <main>
-
 <!-- Zone pour l'insertion de la carte via Leaflet -->
 <div id="map"></div>
 
@@ -65,10 +64,6 @@ option[disabled] {
 <label><span>Continent :</span>
 <select id="select_continent" name="select_continent" value="">
 <option value="" disabled selected>Select continent
-<!--<option data-color="violet">africa-->
-<!--<option data-color="yellow">asia-->
-<!--<option data-color="blue">europe-->
-<!--<option data-color="red">north_america-->
 <option data-color="green">oceania
 <option data-color="orange">south_america
 </select></label>
@@ -84,13 +79,11 @@ option[disabled] {
 <!--ajouter population-->
  <div><span class="label">Population:</span><span class="value" id="population"></span></div>
  <!--ajouter population year-->
- <div><span class="label">Population Year:</span><span class="value" id="PopY"></span></div>
+ <div><span class="label">Population_Year:</span><span class="value" id="PopY"></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
 </div>
-
 <!-- Zone pour l'affichage dynamique des messages d'erreur -->
 <div id="error_msg"></div>
-
 </div>
 </main>
 
@@ -217,8 +210,7 @@ function display_data(response) {
   window.latitude.textContent = data.latitude.toFixed(3);
   window.longitude.textContent = data.longitude.toFixed(3);
   window.population.textContent = data.population.toFixed(3);
-  window.population_year.textContent = data.PopY.toFixed(3);
-
+  window.population_year.textContent = data.Population_year.toFixed(3);
   window.wp.href = 'https://en.wikipedia.org/wiki/'+data.wp;
 <!--添加维基百科网址-->
   window.continent.textContent = data.continent.split(',').map(c => {

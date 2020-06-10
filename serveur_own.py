@@ -17,7 +17,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   static_dir = '/client'
 
   # version du serveur
-  server_version = 'TD3-s7.py/0.1'
+  server_version = 'serveur.py/0.1'
 
   #
   # On surcharge la méthode qui traite les requêtes GET
@@ -42,10 +42,12 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     elif self.path_info[0] == 'service' and self.path_info[1] == 'countries' and len(self.path_info) > 1:
       continent = self.path_info[2] if len(self.path_info) > 2 else None
       self.send_json_countries(continent)
+      print("我们居然在这里")
 
     # le chemin d'accès commence par /service/country/...
     elif self.path_info[0] == 'service' and self.path_info[1] == 'country' and len(self.path_info) > 2:
       self.send_json_country(self.path_info[2])
+      print('我们的确在这一步')
 
     # ou pas...
     else:
@@ -122,87 +124,31 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 
 
   # On renvoie la liste des pays avec leurs coordonnées
-
   def send_json_countries(self,continent):
-
     # on récupère la liste de pays depuis la base de données
     r = self.db_get_countries(continent)
-
     # on renvoie une liste de dictionnaires au format JSON
     data = [ {k:a[k] for k in a.keys()} for a in r]
+    print('countries里面是啥',data)
     json_data = json.dumps(data, indent=4)
     headers = [('Content-Type','application/json')]
     self.send(json_data,headers)
-
-  # #
-  # # On renvoie la liste des pays
-  # #
-  # def send_countries(self):
-  #
-  #   # récupération de la liste des pays dans la base
-  #   r = self.db_get_countries()
-  #
-  #   # construction de la réponse
-  #   txt = 'List of all {} countries :\n'.format(len(r))
-  #   n = 0
-  #   for a in r:
-  #      n += 1
-  #      txt = txt + '[{}] - {}\n'.format(n,a[0])
-  #
-  #   # envoi de la réponse
-  #   headers = [('Content-Type','text/plain;charset=utf-8')]
-  #   self.send(txt,headers)
-  #
-  # #
-  # # On renvoie les informations d'un pays
-  # #
-  # def send_country(self,country):
-  #
-  #   # on récupère le pays depuis la base de données
-  #   r = self.db_get_country(country)
-  #
-  #   # on n'a pas trouvé le pays demandé
-  #   if r == None:
-  #     self.send_error(404,'Country not found')
-  #
-  #   # on génère un document au format html
-  #   else:
-  #     body = '<!DOCTYPE html>\n<meta charset="utf-8">\n'
-  #     body += '<title>{}</title>'.format(country)
-  #     body += '<link rel="stylesheet" href="/TD2-s8.css">'
-  #     body += '<main>'
-  #     body += '<h1>{}</h1>'.format(r['name'])
-  #     body += '<ul>'
-  #     body += '<li>{}: {}</li>'.format('Continent',r['continent'].capitalize())
-  #     body += '<li>{}: {}</li>'.format('Capital',r['capital'])
-  #     body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
-  #     body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])
-  #     body += '</ul>'
-  #     body += '</main>'
-  #
-  #     # on envoie la réponse
-  #     headers = [('Content-Type','text/html;charset=utf-8')]
-  #     self.send(body,headers)
-
   #
   # On renvoie les informations d'un pays au format json
   #
   def send_json_country(self,country):
-
     # on récupère le pays depuis la base de données
     r = self.db_get_country(country)
-
     # on n'a pas trouvé le pays demandé
     if r == None:
       self.send_error(404,'Country not found')
-
     # on renvoie un dictionnaire au format JSON
     else:
       data = {k:r[k] for k in r.keys()}
+      print('这个data是个什么鬼哦',data)
       json_data = json.dumps(data, indent=4)
       headers = [('Content-Type','application/json')]
       self.send(json_data,headers)
-
 
   #
   # Récupération de la liste des pays depuis la base
@@ -211,18 +157,14 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     c = conn.cursor()
     # ajouter nouvelles données
     sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent from countries'
-
     # les pays d'un continent
     if continent:
       sql += ' WHERE continent LIKE ?'
       c.execute(sql,('%{}%'.format(continent),))
-
     # tous les pays de la base
     else:
       c.execute(sql)
-
     return c.fetchall()
-
 
   #
   # Récupération d'un pays dans la base
@@ -230,12 +172,10 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   def db_get_country(self,country):
     # préparation de la requête SQL
     c = conn.cursor()
-    sql = 'SELECT * from countries WHERE wp=?'
-
+    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent from countries'
     # récupération de l'information (ou pas)
-    c.execute(sql,(country,))
+    c.execute(sql)
     return c.fetchone()
-
 
   #
   # On envoie les entêtes et le corps fourni
