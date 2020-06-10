@@ -12,6 +12,17 @@ body {
 }
 
 /* bandeau de titre */
+.header  {
+  height: 90px;
+  margin: 0;
+  background : #00000;
+}
+
+
+
+
+
+/* zone de la carte & infos*/
 h1 { 
   color: white;
   border: none;
