@@ -105,7 +105,6 @@ def save_country(conn,country,info):
          population = get_population(info[0])
          population_year = get_population_year(info[0])
          continent = info[-1]
-         flag = ""
          # soumission de la commande (noter que le second argument est un tuple)
          c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent, flag))
      except Exception as e:
