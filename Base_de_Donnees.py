@@ -138,10 +138,20 @@ def save_info_zip(conn,file):
             save_country(conn,str(country),info)
             
     
-def get_flag(info):
-     
+def get_flag(name):
+    with ZipFile('flags.zip','r') as z: 
+        for c in z.namelist():
+            if match_flags(name,c):
+                return c
     
-    
+def match_flags(a,b):
+    n=len(a)
+    if a[0].lower() != b[6] :
+        return False
+    for i in range(1,n-5):
+        if a[i] != b[i+6]:
+            return False
+    return True
             
 def delete_info_zip(conn,file):
     with ZipFile(file+'.zip','r') as z: # liste des documents contenus dans le fichier zip
@@ -150,5 +160,20 @@ def delete_info_zip(conn,file):
             delete_country(conn,str(country))
             
 conn = sqlite3.connect('pays.sqlite')
+c=conn.cursor()
+c.execute("""DROP TABLE countries""")
+c.execute("""CREATE TABLE `countries` (              -- la table est nommé "countries"
+	`wp`	TEXT NOT NULL UNIQUE,       -- nom de la page wikipédia, non nul, unique
+    `name`	TEXT,                       -- nom complet du pays
+	`capital`	TEXT,                   -- nom de la capitale
+	`latitude`	REAL,                   -- latitude, champ numérique à valeur décimale
+	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
+	`area`      REAL,
+    `population`  REAL,
+    `population_year`  REAL,
+    `continent`    TEXT,
+    `flag`      TEXT,
+    PRIMARY KEY(`wp`)                   -- wp est la clé primaire
+);""")
 save_info_zip(conn,"south_america")
 save_info_zip(conn,"oceania")
