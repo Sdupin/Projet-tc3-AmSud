@@ -132,5 +132,4 @@ def delete_info_zip(conn,file):
             
 conn = sqlite3.connect('pays.sqlite')
 save_info_zip(conn,"south_america")
-
-# Oui
+save_info_zip(conn,"oceania")
