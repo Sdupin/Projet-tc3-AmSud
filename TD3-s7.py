@@ -263,7 +263,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
 #
 # Ouverture d'une connexion avec la base de données
 #
-conn = sqlite3.connect('pays_cor.sqlite')
+conn = sqlite3.connect('pays.sqlite')
 
 # Pour accéder au résultat des requêtes sous forme d'un dictionnaire
 conn.row_factory = sqlite3.Row
