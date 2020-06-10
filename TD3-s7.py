@@ -30,14 +30,14 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     if self.path.startswith('/time'):
       self.send_time()
    
-    # le chemin d'accès commence par /countries
-    elif self.path.startswith('/countries'):
-      self.send_countries()
-
-    # le chemin d'accès commence par /country et se poursuit par un nom de pays
-    elif self.path_info[0] == 'country' and len(self.path_info) > 1:
-      self.send_country(self.path_info[1])
-      
+    # # le chemin d'accès commence par /countries
+    # elif self.path.startswith('/countries'):
+    #   self.send_countries()
+    #
+    # # le chemin d'accès commence par /country et se poursuit par un nom de pays
+    # elif self.path_info[0] == 'country' and len(self.path_info) > 1:
+    #   self.send_country(self.path_info[1])
+    #
     # le chemin d'accès commence par /service/countries/...
     elif self.path_info[0] == 'service' and self.path_info[1] == 'countries' and len(self.path_info) > 1:
       continent = self.path_info[2] if len(self.path_info) > 2 else None
@@ -120,9 +120,9 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on envoie
     self.send(body,headers)
 
-  #
+
   # On renvoie la liste des pays avec leurs coordonnées
-  #
+
   def send_json_countries(self,continent):
 
     # on récupère la liste de pays depuis la base de données
@@ -134,55 +134,55 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     headers = [('Content-Type','application/json')]
     self.send(json_data,headers)
 
+  # #
+  # # On renvoie la liste des pays
+  # #
+  # def send_countries(self):
   #
-  # On renvoie la liste des pays
+  #   # récupération de la liste des pays dans la base
+  #   r = self.db_get_countries()
   #
-  def send_countries(self):
-
-    # récupération de la liste des pays dans la base
-    r = self.db_get_countries()
-
-    # construction de la réponse
-    txt = 'List of all {} countries :\n'.format(len(r))
-    n = 0
-    for a in r:
-       n += 1
-       txt = txt + '[{}] - {}\n'.format(n,a[0])
-    
-    # envoi de la réponse
-    headers = [('Content-Type','text/plain;charset=utf-8')]
-    self.send(txt,headers)
-
+  #   # construction de la réponse
+  #   txt = 'List of all {} countries :\n'.format(len(r))
+  #   n = 0
+  #   for a in r:
+  #      n += 1
+  #      txt = txt + '[{}] - {}\n'.format(n,a[0])
   #
-  # On renvoie les informations d'un pays
+  #   # envoi de la réponse
+  #   headers = [('Content-Type','text/plain;charset=utf-8')]
+  #   self.send(txt,headers)
   #
-  def send_country(self,country):
-
-    # on récupère le pays depuis la base de données
-    r = self.db_get_country(country)
-
-    # on n'a pas trouvé le pays demandé
-    if r == None:
-      self.send_error(404,'Country not found')
-
-    # on génère un document au format html
-    else:
-      body = '<!DOCTYPE html>\n<meta charset="utf-8">\n'
-      body += '<title>{}</title>'.format(country)
-      body += '<link rel="stylesheet" href="/TD2-s8.css">'
-      body += '<main>'
-      body += '<h1>{}</h1>'.format(r['name'])
-      body += '<ul>'
-      body += '<li>{}: {}</li>'.format('Continent',r['continent'].capitalize())
-      body += '<li>{}: {}</li>'.format('Capital',r['capital'])
-      body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
-      body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])
-      body += '</ul>'
-      body += '</main>'
-
-      # on envoie la réponse
-      headers = [('Content-Type','text/html;charset=utf-8')]
-      self.send(body,headers)
+  # #
+  # # On renvoie les informations d'un pays
+  # #
+  # def send_country(self,country):
+  #
+  #   # on récupère le pays depuis la base de données
+  #   r = self.db_get_country(country)
+  #
+  #   # on n'a pas trouvé le pays demandé
+  #   if r == None:
+  #     self.send_error(404,'Country not found')
+  #
+  #   # on génère un document au format html
+  #   else:
+  #     body = '<!DOCTYPE html>\n<meta charset="utf-8">\n'
+  #     body += '<title>{}</title>'.format(country)
+  #     body += '<link rel="stylesheet" href="/TD2-s8.css">'
+  #     body += '<main>'
+  #     body += '<h1>{}</h1>'.format(r['name'])
+  #     body += '<ul>'
+  #     body += '<li>{}: {}</li>'.format('Continent',r['continent'].capitalize())
+  #     body += '<li>{}: {}</li>'.format('Capital',r['capital'])
+  #     body += '<li>{}: {:.3f}</li>'.format('Latitude',r['latitude'])
+  #     body += '<li>{}: {:.3f}</li>'.format('Longitude',r['longitude'])
+  #     body += '</ul>'
+  #     body += '</main>'
+  #
+  #     # on envoie la réponse
+  #     headers = [('Content-Type','text/html;charset=utf-8')]
+  #     self.send(body,headers)
 
   #
   # On renvoie les informations d'un pays au format json
@@ -209,6 +209,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   #
   def db_get_countries(self,continent=None):
     c = conn.cursor()
+    # ajouter nouvelles données
     sql = 'SELECT wp, capital, latitude, longitude from countries'
 
     # les pays d'un continent
