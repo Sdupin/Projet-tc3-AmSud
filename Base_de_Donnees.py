@@ -182,7 +182,7 @@ c.execute("""CREATE TABLE `countries` (              -- la table est nommé "cou
 	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
 	`area`      REAL,
     `population`  INTEGER,
-    `population_year`  REAL,
+    `population_year`  INTEGER,
     `continent`    TEXT,
     `flag`      TEXT,
     `currency`  TEXT,
