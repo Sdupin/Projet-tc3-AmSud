@@ -96,7 +96,7 @@ def get_population_year(info):
 def save_country(conn,country,info):
      c = conn.cursor()
      try:
-         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)'
+         sql = 'INSERT INTO countries VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
          # les infos à enregistrer
          name = get_name(info[0])
          capital = get_capital(info[0])
@@ -106,7 +106,7 @@ def save_country(conn,country,info):
          population_year = get_population_year(info[0])
          continent = info[-1]
          # soumission de la commande (noter que le second argument est un tuple)
-         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent))
+         c.execute(sql,(country,name, capital, coords['lat'],coords['lon'],area,population,population_year, continent, flag))
      except Exception as e:
          if str(e) == 'UNIQUE constraint failed: countries.wp':
              # ce pays a été déjà enregistré
