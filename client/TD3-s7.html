@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <title>am-sud-oceanie.html</title>
 <script src="leaflet.js"> // Bibliothèque Leaflet : http://leafletjs.com/ </script>
-<link rel='stylesheet' type="text/css" href="style.css"
+<link rel='stylesheet' type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
 <meta charset='utf-8'>
 <style>
 body {
   font-family: "Comic Sans MS", cursive,sans-serif;
   color: green;
-<!---->
 }
 main {
   margin: 20px;
@@ -61,17 +60,15 @@ option[disabled] {
 
 <!-- partie gauche de l'écran -->
 <div id="left">
-<h1>Countries of the world</h1>
-
-<!-- Choix du continent -->
+<h1>Countries of the South America and Oceania</h1>
 <div>
 <label><span>Continent :</span>
 <select id="select_continent" name="select_continent" value="">
 <option value="" disabled selected>Select continent
-<option data-color="violet">africa
-<option data-color="yellow">asia
-<option data-color="blue">europe
-<option data-color="red">north_america
+<!--<option data-color="violet">africa-->
+<!--<option data-color="yellow">asia-->
+<!--<option data-color="blue">europe-->
+<!--<option data-color="red">north_america-->
 <option data-color="green">oceania
 <option data-color="orange">south_america
 </select></label>
@@ -84,6 +81,10 @@ option[disabled] {
  <div><span class="label">Capital:</span><span class="value" id="capital"></span></div>
  <div><span class="label">Latitude:</span><span class="value" id="latitude"></span></div>
  <div><span class="label">Longitude:</span><span class="value" id="longitude"></span></div>
+<!--ajouter population-->
+ <div><span class="label">Population:</span><span class="value" id="population"></span></div>
+ <!--ajouter population year-->
+ <div><span class="label">Population Year:</span><span class="value" id="PopY"></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
 </div>
 
@@ -101,7 +102,6 @@ window.select_continent.options[0].selected = 'selected';
 window.leaflet_map = L.map('map',{zoomSnap: 0.01});
 
 // ajout d'une couche de dalles OpenStreetMap
-//加地图的地方。。。
 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
   attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(window.leaflet_map);
