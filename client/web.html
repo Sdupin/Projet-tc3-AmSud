@@ -86,7 +86,7 @@ option[disabled] {
 <!--ajouter population-->
  <div><span class="label">Population:</span><span class="value" id="population"></span></div>
  <!--ajouter population year-->
- <div><span class="label">Population_Year:</span><span class="value" id="PopY"></span></div>
+ <div><span class="label">Population Year:</span><span class="value" id="population_year"></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
 </div>
 <!-- Zone pour l'affichage dynamique des messages d'erreur -->
@@ -184,6 +184,7 @@ function create_marker_icon(color) {
 }
 
 
+
 // gestion d'une réponse d'erreur
 function display_error(code,message) {
   window.country_data.classList.add('hidden');
@@ -217,7 +218,7 @@ function display_data(response) {
   window.latitude.textContent = data.latitude.toFixed(3);
   window.longitude.textContent = data.longitude.toFixed(3);
   window.population.textContent = data.population.toFixed(3);
-  window.population_year.textContent = data.Population_year.toFixed(3);
+  window.population_year.textContent = data.population_year.toFixed(3);
   window.wp.href = 'https://en.wikipedia.org/wiki/'+data.wp;
 <!--添加维基百科网址-->
   window.continent.textContent = data.continent.split(',').map(c => {
