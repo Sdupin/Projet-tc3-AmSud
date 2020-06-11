@@ -1,9 +1,9 @@
 ﻿/* fond de page */
 body {
-  background-image: linear-gradient(0deg, beige, beige, beige);
+  background-color: #ccff90;
   background-size: 100%;
   background-repeat: no-repeat;
-  color: white;
+  color: red;
   height: 100vh;
   margin: 0;
   /* pour éviter l'ascenseur */

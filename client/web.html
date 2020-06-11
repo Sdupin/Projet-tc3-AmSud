@@ -4,11 +4,14 @@
 <link rel='stylesheet' type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
 <meta charset='utf-8'>
+
 <style>
+
 body {
-  font-family: "Comic Sans MS", cursive,sans-serif;
+  font-family: "Optima", cursive,sans-serif;
   color: green;
 }
+
 main {
   margin: 20px;
   padding: 15px;
@@ -17,11 +20,10 @@ main {
   box-shadow: 3px 3px 3px #444;
   background: linear-gradient(0deg, #ffa50040, gray);
 }
-/* bandeau de titre */
-.header  {
-  height: 20px;
-  margin: 0;
-  background : red;
+
+h3 {
+  margin: 1px;
+  color: red;
 }
 
 h1 {
@@ -31,6 +33,7 @@ h1 {
   font-family: Arial;
   text-shadow: 1px 1px green;
 }
+
 h2 {
 display: block;
 font-style: italic;
@@ -58,7 +61,7 @@ option[disabled] {
 #map {
   width:750px;
   height:500px;
-  border: 1px solid black;
+  border: 2px solid black;
   float: right;
 }
 #left {
@@ -67,6 +70,11 @@ option[disabled] {
 </style>
 
 <main>
+<!-- bandeau de titre -->
+<div id="high">
+  <h3>Countries of South America & Oceania</h3>
+</div>
+
 <!-- Zone pour l'insertion de la carte via Leaflet -->
 <div id="map"></div>
 
@@ -77,8 +85,8 @@ option[disabled] {
 <label><span>Continent :</span>
 <select id="select_continent" name="select_continent" value="">
 <option value="" disabled selected>Select continent
-<option data-color="green">oceania
-<option data-color="orange">south_america
+<option data-color="green">Oceania
+<option data-color="orange">South America
 </select></label>
 </div>
 
