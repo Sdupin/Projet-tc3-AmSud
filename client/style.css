@@ -11,7 +11,11 @@ body {
   box-sizing: border-box;
 }
 
-
+#high {
+	height: 50px;
+	width: 100%;
+	background-color: white;
+}
 
 
 
