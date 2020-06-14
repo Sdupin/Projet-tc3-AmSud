@@ -8,7 +8,7 @@ def get_info(country):
     from zipfile import ZipFile
     import json
 
-    with ZipFile("oceania.zip","r") as z:
+    with ZipFile("south_america.zip","r") as z:
     
         # liste des documents contenus dans le fichier zip
         z.namelist()
@@ -94,8 +94,21 @@ def get_population(info):
             population = float(population.replace(",",""))
             return population
         except :
+            country = info["common_name"]
+            fichier = open("WPP2019_TotalPopulationBySex.csv","r")
+            fichier.readline()
+            for i in range(280933):
+                ligne = fichier.readline()
+                ligne = ligne.split(",")
+                pays = ligne[1]
+                if country in pays : 
+                    if int(ligne[4]) == 2019 :
+                        population = ligne[8]
+                        population= population.replace(".","")
+                        return int(population)
+            fichier.close()
             return f""
-    
+            
 def get_population_year(info):
     try :
         population_year = info['population_census_year']
@@ -107,8 +120,8 @@ def get_population_year(info):
             population_year = int(population_year.replace(",",""))
             return population_year
         except :
-            return f""
-
+            return 2019
+        
 def save_country(conn,country,info):
      c = conn.cursor()
      try:
