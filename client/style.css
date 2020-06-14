@@ -3,12 +3,13 @@ body {
   background-color: #ccff90;
   background-size: 100%;
   background-repeat: no-repeat;
-  color: red;
   height: 100vh;
   margin: 0;
   /* pour éviter l'ascenseur */
   border: 1px solid transparent;
   box-sizing: border-box;
+  font-family: "Optima", cursive,sans-serif;
+  color: white;
 }
 
 
@@ -29,6 +30,10 @@ h1 {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin-bottom: 1.33em;
+  padding: 10px;
+  color: white;
+  font-family: Arial;
+  text-shadow: 1px 1px green;
 }
 
 /* contenu de la page */
