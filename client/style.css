@@ -3,12 +3,13 @@ body {
   background-color: #ccff90;
   background-size: 100%;
   background-repeat: no-repeat;
-  color: red;
   height: 100vh;
   margin: 0;
   /* pour éviter l'ascenseur */
   border: 1px solid transparent;
   box-sizing: border-box;
+  font-family: "Optima", cursive,sans-serif;
+  color: white;
 }
 
 
@@ -29,20 +30,61 @@ h1 {
   padding-top: 0.5em;
   padding-bottom: 0.5em;
   margin-bottom: 1.33em;
+  padding: 10px;
+  color: white;
+  font-family: Arial;
+  text-shadow: 1px 1px green;
 }
 
-/* contenu de la page */
 
+h2 {
+display: block;
+font-style: italic;
+color: white
+}
 
-/* polices de caractères */
-body { font-family: Trebuchet MS, sans-serif; }
 
 /* positionnement des champs */
-label { display: block; }
-label span { display: inline-block; width: 5em; height: 1.5em; }
+label { 
+  display: block; 
+  padding-bottom: 0.5em;
+}
+label span { 
+  display: inline-block; 
+  width: 5em; 
+  height: 1.5em; 
+}
+.label {
+  display: inline-block;
+  width : 7em;
+}
+
+option[disabled] {
+  font-style: italic;
+  color: #ccc;
+}
+.hidden {
+  display: none;
+}
 
 a.delete:hover {
   color: red;
 }
-#map { height: 400px; width: 600px; }
+
+#map {
+  width:750px;
+  height:500px;
+  border: 2px solid black;
+  float: right;
+}
+
+
+
+#left {
+  min-height:502px;
+}
+
+
+
+
 
