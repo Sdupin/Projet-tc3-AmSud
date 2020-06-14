@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <title>am-sud-oceanie.html</title>
 <script src="leaflet.js"> // Bibliothèque Leaflet : http://leafletjs.com/ </script>
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
 <link rel='stylesheet' type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
+<link rel='stylesheet' type="text/css" href="materialize/css/materialize.css">
 <meta charset='utf-8'>
 
 <style>
@@ -12,14 +14,7 @@ body {
   color: green;
 }
 
-main {
-  margin: 20px;
-  padding: 15px;
-  border: 1px solid #666;
-  border-radius: 5px;
-  box-shadow: 3px 3px 3px #444;
-  background: linear-gradient(0deg, #ffa50040, gray);
-}
+
 
 h3 {
   margin: 1px;
@@ -71,11 +66,17 @@ option[disabled] {
 
 <main>
   
-<div class="row">
-      <div class="col s12">This div is 12-columns wide on all screen sizes</div>
-      <div class="col s6">6-columns (one-half)</div>
-      <div class="col s6">6-columns (one-half)</div>
-</div>
+
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo">Logo</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="sass.html">Sass</a></li>
+        <li><a href="badges.html">Components</a></li>
+        <li><a href="collapsible.html">JavaScript</a></li>
+      </ul>
+    </div>
+  </nav>
 
 <!-- bandeau de titre -->
 <div id="high">
@@ -113,6 +114,12 @@ option[disabled] {
 </main>
 
 <script>
+
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });
+
 // reset du select
 window.select_continent.options[0].selected = 'selected';
 
