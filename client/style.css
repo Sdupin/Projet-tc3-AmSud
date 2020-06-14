@@ -73,8 +73,8 @@ a.delete:hover {
 
 #map {
   width:750px;
-  height:500px;
-  border: 2px solid black;
+  height:545px;
+  border: 1px solid black;
   float: right;
 }
 
@@ -83,8 +83,4 @@ a.delete:hover {
 #left {
   min-height:502px;
 }
-
-
-
-
 
