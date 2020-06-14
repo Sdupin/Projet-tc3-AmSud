@@ -42,22 +42,28 @@ def get_capital(info):
         return f""
     
 def get_coords(info):
-    coor_get = info['coordinates']
-    coor = {'lat':"",'lon':""}
-    m = re.findall('Coord(.*)type',coor_get)[0]
-    sign = re.findall('[A-Z]',m)
-    num = re.split('[A-Z]',m)
-    lat = re.findall('\d+',num[0])
-    lon = re.findall('\d+',num[1])
-    lat = float(lat[0]) + (float(lat[1])/60 if len(lat)==2 else 0) + (float(lat[2])/3600 if len(lat)==3 else 0)
-    lon = float(lon[0]) + (float(lon[1])/60 if len(lon)==2 else 0) + (float(lon[2])/3600 if len(lon)==3 else 0)
-    if sign[0]=='S':        # S: négatif
-        lat = -lat
-    if sign[1]=='W':        # W: négatif
-        lon = -lon
-    coor['lat'] = lat
-    coor['lon'] = lon
-    return coor
+    try :
+        coor_get = info['coordinates']
+        coor = {'lat':"",'lon':""}
+        m = re.findall('Coord(.*)type',coor_get)[0]
+        sign = re.findall('[A-Z]',m)
+        num = re.split('[A-Z]',m)
+        lat = re.findall('\d+',num[0])
+        lon = re.findall('\d+',num[1])
+        lat = float(lat[0]) + (float(lat[1])/60 if len(lat)==2 else 0) + (float(lat[2])/3600 if len(lat)==3 else 0)
+        lon = float(lon[0]) + (float(lon[1])/60 if len(lon)==2 else 0) + (float(lon[2])/3600 if len(lon)==3 else 0)
+        if sign[0]=='S':        # S: négatif
+            lat = -lat
+        if sign[1]=='W':        # W: négatif
+            lon = -lon
+        coor['lat'] = lat
+        coor['lon'] = lon
+        return coor
+    except :
+        coor = {'lat':"",'lon':""}
+        coor['lat'] = f""
+        coor['lon'] = f""
+        return coor
 
 def get_currency(info):
     
