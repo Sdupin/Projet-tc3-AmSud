@@ -14,7 +14,7 @@ body {
 
 /* zone de la carte & infos*/
 h1 { 
-  color: white;
+  color: black;
   border: none;
   box-shadow: none;
   background-color: rgba(255,255,255,0.3);
@@ -32,7 +32,7 @@ h1 {
 }
 
 #country_data {
-  background-image: https://pixabay.com/fr/photos/la-carte-boussole-vintage-atlas-4896141/
+  background-color: yellow
 }
 
 h2 {
