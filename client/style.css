@@ -12,11 +12,6 @@ body {
   color: white;
 }
 
-
-
-
-
-
 /* zone de la carte & infos*/
 h1 { 
   color: white;
@@ -36,6 +31,9 @@ h1 {
   text-shadow: 1px 1px green;
 }
 
+#country_data {
+  background-image: https://pixabay.com/fr/photos/la-carte-boussole-vintage-atlas-4896141/
+}
 
 h2 {
 display: block;
@@ -61,6 +59,7 @@ label span {
   width: 5em; 
   height: 1.5em; 
 }
+
 .label {
   display: inline-block;
   width : 7em;
@@ -79,8 +78,8 @@ a.delete:hover {
 }
 
 #map {
-  width:750px;
-  height:545px;
+  width:650px;
+  height:510px;
   border: 1px solid black;
   float: right;
 }
