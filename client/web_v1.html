@@ -5,38 +5,47 @@
 <link rel='stylesheet' type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="leaflet.css" />
 <meta charset='utf-8'>
+
 <style>
+
+/*Permet de définir la police et la couleur du texte de manière générale*/
 body {
-  font-family: "Comic Sans MS", cursive,sans-serif;
-  color: green;
+  font-family: "Verdana", cursive,sans-serif;
+  color: white;
 }
+
+/*Permet de créer un cadre à l'arrière plan de la page*/
 main {
   margin: 20px;
   padding: 15px;
   border: 1px solid #666;
   border-radius: 5px;
+  border-color: white;
   box-shadow: 3px 3px 3px #444;
-  background: linear-gradient(0deg, #ffa50040, gray);
+  background: linear-gradient(0deg, #3396FF, #3D0ED0);
 }
 /* bandeau de titre */
-.header  {
-  height: 20px;
+/*.header  {
+  height: 50px;
   margin: 0;
-  background : red;
-}
+  background : #001399;
+}*/
 
+/*Permet de modifier les caractéristiques du texte du titre de la page*/
 h1 {
   margin-top: 0;
   padding: 10px;
   color: white;
-  font-family: Arial;
-  text-shadow: 1px 1px green;
+  font-family: Calibri;
+  text-shadow: 1px 1px black;
 }
+
+/*Permet de modifier les caractéristiques du texte du nom du pays*/
 h2 {
 display: block;
-font-style: italic;
-color: white
+color: red
 }
+
 label {
   display: block;
   padding-bottom: 0.5em;
@@ -50,7 +59,7 @@ label span {
   width : 7em;
 }
 option[disabled] {
-  font-style: italic;
+  font-style: bold;
   color: #ccc;
 }
 .hidden {
