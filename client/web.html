@@ -12,7 +12,7 @@
   
 <!-- bandeau de titre -->
 <nav>
-  <div class="nav-wrapper black">
+  <div class="nav-wrapper black" style="width: 100%">
     <a class="brand-logo"> Countries of South America & Oceania </a>
     <ul id="nav-mobile" class="right hide-on-med-and-down">
     </ul>
@@ -24,7 +24,7 @@
   <!-- zone à gauche de l'éran -->
   <div class="col s6">
     <div id="left">
-    <div class="input-field col s12">
+    <div class="input-field col s6">
     <label><span>Continent :</span>
     <select id="select_continent" name="select_continent" value="">
     <option value="" disabled selected>Select continent
@@ -37,8 +37,8 @@
 <!-- Zone pour l'affichage dynamique des descriptions -->
 <div id="country_data" class="hidden">
  <h2 id="country_name"></h2>
- <div><span class="label">Capital:</span><span class="value" id="capital"></span></div>
- <div><span class="label">Latitude:</span><span class="value" id="latitude"></span></div>
+ <div><span class="label text-black">Capital:</span><span class="value" id="capital"></span></div>
+ <div><span class="label text-black">Latitude:</span><span class="value" id="latitude"></span></div>
  <div><span class="label">Longitude:</span><span class="value" id="longitude"></span></div>
 <!--ajouter population-->
  <div><span class="label">Population(<span class="value" id="year"></span>):<span class="value" id="population"></span></span></div>
@@ -52,7 +52,7 @@
   </div>
 
     <!-- Zone pour l'insertion de la carte via Leaflet -->
-  <div class="col s6">
+  <div class="col s6 center-align">
     <div id="map"></div>
   </div>
 </div>

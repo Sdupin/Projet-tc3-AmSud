@@ -32,7 +32,7 @@ h1 {
 }
 
 #country_data {
-  background-color: yellow
+
 }
 
 h2 {
@@ -45,6 +45,8 @@ font-size: 30px
 
 #left {
   min-height:545px;
+  background-image: url("doodle-4678658_1920.png");
+  background-size: 650px 600px
 }
 
 
