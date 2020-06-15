@@ -1,100 +1,93 @@
 <!DOCTYPE html>
 <title>am-sud-oceanie.html</title>
 <script src="leaflet.js"> // Bibliothèque Leaflet : http://leafletjs.com/ </script>
+<script type="text/javascript" src="materialize/js/materialize.js"></script>
+<link rel='stylesheet' type="text/css" href="materialize/css/materialize.css">
 <link rel='stylesheet' type="text/css" href="style.css">
 <link rel="stylesheet" type="text/css" href="leaflet.css" /> 
 <meta charset='utf-8'>
-<style>
-body {
-  font-family: "Comic Sans MS", cursive,sans-serif;
-  color: green;
-}
-main {
-  margin: 20px;
-  padding: 15px;
-  border: 1px solid #666;
-  border-radius: 5px;
-  box-shadow: 3px 3px 3px #444;
-  background: linear-gradient(0deg, #ffa50040, gray);
-}
-/* bandeau de titre */
-.header  {
-  height: 90px;
-  margin: 0;
-  background : red;
-}
 
-h1 {
-  margin-top: 0;
-  color: white;
-  font-family: Arial;
-  text-shadow: 1px 1px green;
-}
-label {
-  display: block;
-  padding-bottom: 0.5em;
-}
-label span {
-  display: inline-block;
-  width : 6em;
-}
-.label {
-  display: inline-block;
-  width : 7em;
-}
-option[disabled] {
-  font-style: italic;
-  color: #ccc;
-}
-.hidden {
-  display: none;
-}
-#map {
-  width:750px;
-  height:500px;
-  border: 1px solid black;
-  float: right;
-}
-#left {
-  min-height:502px;
-}
-</style>
 
 <main>
+  
+<!-- bandeau de titre -->
+<nav>
+  <div class="nav-wrapper black">
+    <a href="#" class="brand-logo"> Coutries of South America & Oceania </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+    </ul>
+  </div>
+</nav>
+
+
 <!-- Zone pour l'insertion de la carte via Leaflet -->
 <div id="map"></div>
 
 <!-- partie gauche de l'écran -->
 <div id="left">
-<h1>Countries of the South America and Oceania</h1>
-<div>
+<h1>Countries of South America and Oceania</h1>
+ <div class="input-field col s12">
 <label><span>Continent :</span>
 <select id="select_continent" name="select_continent" value="">
 <option value="" disabled selected>Select continent
-<option data-color="green">oceania
-<option data-color="orange">south_america
+<option data-color="green">Oceania
+<option data-color="orange">South_America
 </select></label>
 </div>
 
 <!-- Zone pour l'affichage dynamique des descriptions -->
 <div id="country_data" class="hidden">
- <h1 id="country_name"></h1>
- <div><span class="label">Continent:</span><span class="value" id="continent"></span></div>
+ <h2 id="country_name"></h2>
  <div><span class="label">Capital:</span><span class="value" id="capital"></span></div>
  <div><span class="label">Latitude:</span><span class="value" id="latitude"></span></div>
  <div><span class="label">Longitude:</span><span class="value" id="longitude"></span></div>
 <!--ajouter population-->
- <div><span class="label">Population:</span><span class="value" id="population"></span></div>
- <!--ajouter population year-->
- <div><span class="label">Population_Year:</span><span class="value" id="PopY"></span></div>
+ <div><span class="label">Population(<span class="value" id="year"></span>):<span class="value" id="population"></span></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
 </div>
 <!-- Zone pour l'affichage dynamique des messages d'erreur -->
 <div id="error_msg"></div>
 </div>
+
+
+<!-- Bandeau au pied de la page -->
+<footer class="page-footer indigo darken-4">
+ <!-- <div class="container">
+    <div class="row">
+    <div class="col l6 s12">
+      <h5 class="white-text">Footer Content</h5>
+      <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
+      </div>
+      <div class="col l4 offset-l2 s12">
+        <h5 class="white-text">Links</h5>
+        <ul>
+        </ul>
+      </div>
+      </div>
+   </div> -->
+   <div class="footer-copyright">
+            <div class="container">
+            Projet d'application WEB - Informatique tc3
+            <a class="grey-text text-lighten-4 right"> Sylvio Dupin - Ronan Riverie - Jasmine Truchot - Mengqian Zou</a>
+            </div>
+          </div>
+</footer>
+
+
 </main>
 
 <script>
+
+ document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('.sidenav');
+    var instances = M.Sidenav.init(elems);
+  });
+
+document.addEventListener('DOMContentLoaded', function() {
+    var elems = document.querySelectorAll('select');
+    var instances = M.FormSelect.init(elems);
+  });
+
 // reset du select
 window.select_continent.options[0].selected = 'selected';
 
@@ -184,6 +177,7 @@ function create_marker_icon(color) {
 }
 
 
+
 // gestion d'une réponse d'erreur
 function display_error(code,message) {
   window.country_data.classList.add('hidden');
@@ -216,10 +210,9 @@ function display_data(response) {
   window.capital.textContent = data.capital;
   window.latitude.textContent = data.latitude.toFixed(3);
   window.longitude.textContent = data.longitude.toFixed(3);
-  window.population.textContent = data.population.toFixed(3);
-  window.population_year.textContent = data.Population_year.toFixed(3);
+  window.population.textContent = data.population;
+  window.year.textContent = data.population_year;
   window.wp.href = 'https://en.wikipedia.org/wiki/'+data.wp;
-<!--添加维基百科网址-->
   window.continent.textContent = data.continent.split(',').map(c => {
     return c.charAt(0).toUpperCase() + c.slice(1);
   }).join(', ');

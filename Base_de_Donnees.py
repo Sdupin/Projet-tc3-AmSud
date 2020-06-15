@@ -8,7 +8,7 @@ def get_info(country):
     from zipfile import ZipFile
     import json
 
-    with ZipFile("oceania.zip","r") as z:
+    with ZipFile("south_america.zip","r") as z:
     
         # liste des documents contenus dans le fichier zip
         z.namelist()
@@ -42,22 +42,28 @@ def get_capital(info):
         return f""
     
 def get_coords(info):
-    coor_get = info['coordinates']
-    coor = {'lat':"",'lon':""}
-    m = re.findall('Coord(.*)type',coor_get)[0]
-    sign = re.findall('[A-Z]',m)
-    num = re.split('[A-Z]',m)
-    lat = re.findall('\d+',num[0])
-    lon = re.findall('\d+',num[1])
-    lat = float(lat[0]) + (float(lat[1])/60 if len(lat)==2 else 0) + (float(lat[2])/3600 if len(lat)==3 else 0)
-    lon = float(lon[0]) + (float(lon[1])/60 if len(lon)==2 else 0) + (float(lon[2])/3600 if len(lon)==3 else 0)
-    if sign[0]=='S':        # S: négatif
-        lat = -lat
-    if sign[1]=='W':        # W: négatif
-        lon = -lon
-    coor['lat'] = lat
-    coor['lon'] = lon
-    return coor
+    try :
+        coor_get = info['coordinates']
+        coor = {'lat':"",'lon':""}
+        m = re.findall('Coord(.*)type',coor_get)[0]
+        sign = re.findall('[A-Z]',m)
+        num = re.split('[A-Z]',m)
+        lat = re.findall('\d+',num[0])
+        lon = re.findall('\d+',num[1])
+        lat = float(lat[0]) + (float(lat[1])/60 if len(lat)==2 else 0) + (float(lat[2])/3600 if len(lat)==3 else 0)
+        lon = float(lon[0]) + (float(lon[1])/60 if len(lon)==2 else 0) + (float(lon[2])/3600 if len(lon)==3 else 0)
+        if sign[0]=='S':        # S: négatif
+            lat = -lat
+        if sign[1]=='W':        # W: négatif
+            lon = -lon
+        coor['lat'] = lat
+        coor['lon'] = lon
+        return coor
+    except :
+        coor = {'lat':"",'lon':""}
+        coor['lat'] = f""
+        coor['lon'] = f""
+        return coor
 
 def get_currency(info):
     
@@ -88,8 +94,21 @@ def get_population(info):
             population = float(population.replace(",",""))
             return population
         except :
+            country = info["common_name"]
+            fichier = open("WPP2019_TotalPopulationBySex.csv","r")
+            fichier.readline()
+            for i in range(280933):
+                ligne = fichier.readline()
+                ligne = ligne.split(",")
+                pays = ligne[1]
+                if country in pays : 
+                    if int(ligne[4]) == 2019 :
+                        population = ligne[8]
+                        population= population.replace(".","")
+                        return int(population)
+            fichier.close()
             return f""
-    
+            
 def get_population_year(info):
     try :
         population_year = info['population_census_year']
@@ -101,8 +120,8 @@ def get_population_year(info):
             population_year = int(population_year.replace(",",""))
             return population_year
         except :
-            return f""
-
+            return 2019
+        
 def save_country(conn,country,info):
      c = conn.cursor()
      try:
@@ -182,7 +201,7 @@ c.execute("""CREATE TABLE `countries` (              -- la table est nommé "cou
 	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
 	`area`      REAL,
     `population`  INTEGER,
-    `population_year`  REAL,
+    `population_year`  INTEGER,
     `continent`    TEXT,
     `flag`      TEXT,
     `currency`  TEXT,
