@@ -40,8 +40,13 @@ h1 {
 h2 {
 display: block;
 font-style: italic;
-color: white
+color: black;
 }
+
+#left {
+  min-height:502px;
+}
+
 
 
 /* positionnement des champs */
@@ -79,8 +84,4 @@ a.delete:hover {
 }
 
 
-
-#left {
-  min-height:502px;
-}
 
