@@ -8,7 +8,7 @@ body {
   /* pour éviter l'ascenseur */
   border: 1px solid transparent;
   box-sizing: border-box;
-  font-family: "Optima", cursive,sans-serif;
+  font-family: "Arial", cursive,sans-serif;
   color: white;
 }
 
