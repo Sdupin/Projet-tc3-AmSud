@@ -128,7 +128,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on renvoie un dictionnaire au format JSON
     else:
       data = {k:r[k] for k in r.keys()}
-      print('flag是啥',data['flag'])
       json_data = json.dumps(data, indent=4)
       headers = [('Content-Type','application/json')]
       self.send(json_data,headers)
