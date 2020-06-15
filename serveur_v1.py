@@ -157,7 +157,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     sql = 'SELECT * from countries WHERE wp=?'
     # récupération de l'information (ou pas)
     c.execute(sql, (country,))
-    print(c.fetchone)
     return c.fetchone()
 
   #
