@@ -7,7 +7,6 @@ import json
 
 from urllib.parse import urlparse, parse_qs, unquote
 
-
 #
 # Définition du nouveau handler
 #
@@ -29,25 +28,14 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # le chemin d'accès commence par /time
     if self.path.startswith('/time'):
       self.send_time()
-   
-    # # le chemin d'accès commence par /countries
-    # elif self.path.startswith('/countries'):
-    #   self.send_countries()
-    #
-    # # le chemin d'accès commence par /country et se poursuit par un nom de pays
-    # elif self.path_info[0] == 'country' and len(self.path_info) > 1:
-    #   self.send_country(self.path_info[1])
-    #
-    # le chemin d'accès commence par /service/countries/...
+
     elif self.path_info[0] == 'service' and self.path_info[1] == 'countries' and len(self.path_info) > 1:
       continent = self.path_info[2] if len(self.path_info) > 2 else None
       self.send_json_countries(continent)
-      print("我们居然在这里")
 
     # le chemin d'accès commence par /service/country/...
     elif self.path_info[0] == 'service' and self.path_info[1] == 'country' and len(self.path_info) > 2:
       self.send_json_country(self.path_info[2])
-      print('我们的确在这一步')
 
     # ou pas...
     else:
@@ -105,20 +93,16 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   # On envoie un document avec l'heure
   #
   def send_time(self):
-    
     # on récupère l'heure
     time = self.date_time_string()
-
     # on génère un document au format html
     body = '<!doctype html>' + \
            '<meta charset="utf-8">' + \
            '<title>l\'heure</title>' + \
            '<div>Voici l\'heure du serveur :</div>' + \
            '<pre>{}</pre>'.format(time)
-
     # pour prévenir qu'il s'agit d'une ressource au format html
     headers = [('Content-Type','text/html;charset=utf-8')]
-
     # on envoie
     self.send(body,headers)
 
@@ -129,7 +113,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     r = self.db_get_countries(continent)
     # on renvoie une liste de dictionnaires au format JSON
     data = [ {k:a[k] for k in a.keys()} for a in r]
-    print('countries里面是啥',data)
     json_data = json.dumps(data, indent=4)
     headers = [('Content-Type','application/json')]
     self.send(json_data,headers)
@@ -145,7 +128,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     # on renvoie un dictionnaire au format JSON
     else:
       data = {k:r[k] for k in r.keys()}
-      print('这个data是个什么鬼哦',data)
       json_data = json.dumps(data, indent=4)
       headers = [('Content-Type','application/json')]
       self.send(json_data,headers)
