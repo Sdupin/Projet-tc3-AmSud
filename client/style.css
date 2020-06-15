@@ -41,10 +41,12 @@ h2 {
 display: block;
 font-style: italic;
 color: black;
+padding-top: 4em;
+font-size: 30px
 }
 
 #left {
-  min-height:502px;
+  min-height:545px;
 }
 
 
