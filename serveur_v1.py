@@ -113,7 +113,6 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     r = self.db_get_countries(continent)
     # on renvoie une liste de dictionnaires au format JSON
     data = [ {k:a[k] for k in a.keys()} for a in r]
-    print('data里是什么',data)
     json_data = json.dumps(data, indent=4)
     headers = [('Content-Type','application/json')]
     self.send(json_data,headers)
@@ -139,7 +138,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   def db_get_countries(self,continent=None):
     c = conn.cursor()
     # ajouter nouvelles données
-    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent,flag,currency from countries'
+    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent,currency,flag from countries'
     # les pays d'un continent
     if continent:
       sql += ' WHERE continent LIKE ?'
@@ -158,6 +157,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
     sql = 'SELECT * from countries WHERE wp=?'
     # récupération de l'information (ou pas)
     c.execute(sql, (country,))
+    print(c.fetchone)
     return c.fetchone()
 
   #
