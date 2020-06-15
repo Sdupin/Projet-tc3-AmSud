@@ -139,7 +139,7 @@ class RequestHandler(http.server.SimpleHTTPRequestHandler):
   def db_get_countries(self,continent=None):
     c = conn.cursor()
     # ajouter nouvelles données
-    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent,flag from countries'
+    sql = 'SELECT wp, capital, latitude, longitude,population,population_year,continent,flag,currency from countries'
     # les pays d'un continent
     if continent:
       sql += ' WHERE continent LIKE ?'

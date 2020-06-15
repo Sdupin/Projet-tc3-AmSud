@@ -41,7 +41,7 @@
  <div><span class="label">Latitude:</span><span class="value" id="latitude"></span></div>
  <div><span class="label">Longitude:</span><span class="value" id="longitude"></span></div>
  <!--ajouter monnaie-->
- <div><span class="label">Currency:</span><span class="value" id="longitude"></span></div>
+ <div><span class="label">Currency:</span><span class="value" id="currency"></span></div>
 <!--ajouter population-->
  <div><span class="label">Population(<span class="value" id="year"></span>):<span class="value" id="population"></span></span></div>
  <div><span class="label">Read more on:</span><a id="wp" href="">wikipedia</a></div>
@@ -57,10 +57,6 @@
     <div id="map"></div>
   </div>
 </div>
-
-
-
-
 
 
 <!-- Bandeau au pied de la page -->
@@ -225,6 +221,7 @@ function display_data(response) {
   window.longitude.textContent = data.longitude.toFixed(3);
   window.population.textContent = data.population;
   window.year.textContent = data.population_year;
+  window.currency.textContent = data.currency;
   window.wp.href = 'https://en.wikipedia.org/wiki/'+data.wp;
   window.continent.textContent = data.continent.split(',').map(c => {
     return c.charAt(0).toUpperCase() + c.slice(1);
