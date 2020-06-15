@@ -36,6 +36,9 @@ h1 {
   text-shadow: 1px 1px green;
 }
 
+#country_data {
+  background-image: https://pixabay.com/fr/photos/la-carte-boussole-vintage-atlas-4896141/
+}
 
 h2 {
 display: block;
@@ -79,8 +82,8 @@ a.delete:hover {
 }
 
 #map {
-  width:750px;
-  height:545px;
+  width:650px;
+  height:510px;
   border: 1px solid black;
   float: right;
 }
