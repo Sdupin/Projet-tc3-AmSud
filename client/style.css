@@ -12,11 +12,6 @@ body {
   color: white;
 }
 
-
-
-
-
-
 /* zone de la carte & infos*/
 h1 { 
   color: white;
@@ -64,6 +59,7 @@ label span {
   width: 5em; 
   height: 1.5em; 
 }
+
 .label {
   display: inline-block;
   width : 7em;
