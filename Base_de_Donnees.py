@@ -67,13 +67,14 @@ def get_coords(info):
 
 def get_currency(info):
     
-    if info['common_name'] == 'Samoa':
-        return 'Samoan Tala'
-    else:
-        cap = info['currency']
-        m = re.findall('\[\[(.*)\]\]',cap)[0]
-        l = m.split('|')
-        return l[-1]
+    #if info['common_name'] == 'Samoa':
+     #   return 'Samoan Tala'
+    #else:
+    cap = info['currency']
+    m = re.findall('\[\[\D+\]\]',cap)[0]
+    l = m.split('|')
+    print(l)
+    return l[-1]
    
 def get_area(info):
     try :
@@ -192,22 +193,22 @@ def delete_info_zip(conn,file):
             
 conn = sqlite3.connect('pays.sqlite')
 c=conn.cursor()
-c.execute("""DROP TABLE countries""")
-c.execute("""CREATE TABLE `countries` (              -- la table est nommé "countries"
-	`wp`	TEXT NOT NULL UNIQUE,       -- nom de la page wikipédia, non nul, unique
-    `name`	TEXT,                       -- nom complet du pays
-	`capital`	TEXT,                   -- nom de la capitale
-	`latitude`	REAL,                   -- latitude, champ numérique à valeur décimale
-	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
-	`area`      REAL,
-    `population`  INTEGER,
-    `population_year`  INTEGER,
-    `continent`    TEXT,
-    `flag`      TEXT,
-    `currency`  TEXT,
-    `link`      TEXT,
-    PRIMARY KEY(`wp`)                   -- wp est la clé primaire
-);""")
+#c.execute("""DROP TABLE countries""")
+#c.execute("""CREATE TABLE `countries` (              -- la table est nommé "countries"
+# 	`wp`	TEXT NOT NULL UNIQUE,       -- nom de la page wikipédia, non nul, unique
+#     `name`	TEXT,                       -- nom complet du pays
+# 	`capital`	TEXT,                   -- nom de la capitale
+# 	`latitude`	REAL,                   -- latitude, champ numérique à valeur décimale
+# 	`longitude`	REAL,                   -- longitude, champ numérique à valeur décimale
+# 	`area`      REAL,
+#     `population`  INTEGER,
+#     `population_year`  INTEGER,
+#     `continent`    TEXT,
+#     `flag`      TEXT,
+#     `currency`  TEXT,
+#     `link`      TEXT,
+#     PRIMARY KEY(`wp`)                   -- wp est la clé primaire
+# );""")
 save_info_zip(conn,"south_america")
 save_info_zip(conn,"oceania")
                 
