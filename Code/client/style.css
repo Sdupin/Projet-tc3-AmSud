@@ -9,28 +9,7 @@ body {
   border: 1px solid transparent;
   box-sizing: border-box;
   font-family: "Arial", cursive,sans-serif;
-  color: white;
-}
-
-
-
-/* zone de la carte & infos*/
-h1 { 
   color: black;
-  border: none;
-  box-shadow: none;
-  background-color: rgba(255,255,255,0.3);
-  border-top: 3px solid rgba(255,255,255,0.6);
-  border-bottom: 3px solid rgba(255,255,255,0.6);
-  margin-top: 1.33em;
-  text-shadow: 3px 3px 3px black;
-  padding-top: 0.5em;
-  padding-bottom: 0.5em;
-  margin-bottom: 1.33em;
-  padding: 10px;
-  color: white;
-  font-family: Arial;
-  text-shadow: 1px 1px green;
 }
 
 #country_data {
